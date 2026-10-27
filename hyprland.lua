@@ -33,9 +33,9 @@ require("modules.permissions")
 -- Set programs that you use
 local terminal = "kitty"
 local fileManager = "dolphin"
-local launcher = "rofi -show drun -show-icons"
-local menu = "rofi -show drun -show-icons"
-local runner = "rofi -show run"
+-- back up local menu = "rofi -show drun -show-icons"
+-- backup runner local runner = "rofi -show run"
+local browser = "firefox"
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -73,15 +73,38 @@ hl.bind(
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
 )
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(launcher))
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(runner))
+-- configured for rofi hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(launcher))
+
+hl.bind(
+	mainMod .. " + D",
+	hl.dsp.exec_cmd(terminal .. " --class center-tui -- bash " .. "'" .. os.getenv("HOME") .. "/.local/bin/launch_app'")
+)
+hl.bind(
+	mainMod .. " + A",
+	hl.dsp.exec_cmd(
+		terminal .. " --class center-tui -- python3 " .. "'" .. os.getenv("HOME") .. "/.local/bin/add_app.py'"
+	)
+)
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
+hl.bind(
+	mainMod .. " + R",
+	hl.dsp.exec_cmd(terminal .. " --class center-tui " .. os.getenv("HOME") .. "/.local/bin/fzf_run")
+)
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("cliphist list | wofi --dmenu | cliphist decode | wl-copy"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("/home/silverio/wallpaper.sh"))
-hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("waypaper --folder ~/wallpaper"))
+hl.bind(
+	mainMod .. " + SHIFT + W",
+	hl.dsp.exec_cmd(terminal .. " --class center-tui " .. os.getenv("HOME") .. "/.local/bin/selectWallpaper")
+)
+-- this is configured for kitty terminal. Alacrity would need another configuration.
+
+hl.bind(
+	mainMod .. " + Escape",
+	hl.dsp.exec_cmd(terminal .. " --class center-tui " .. os.getenv("HOME") .. "/.local/bin/powermenu")
+)
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
@@ -187,4 +210,16 @@ hl.window_rule({
 
 	move = "20 monitor_h-120",
 	float = true,
+})
+
+-- Center floating TUI utils (App launchers, Powermenus, etc.)
+hl.window_rule({
+	name = "center-tui-launcher",
+	match = { class = "center-tui" },
+
+	float = true,
+	center = true,
+	size = { 600, 400 },
+	stay_focused = true,
+	dim_around = true,
 })
