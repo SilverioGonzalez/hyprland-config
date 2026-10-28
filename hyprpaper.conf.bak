@@ -2,8 +2,8 @@
 ipc = true
 
 wallpaper {
-    monitor = eDP-1
-    path = /home/silverio/wallpaper/a_taxi_parked_outside_a_restaurant.png
+    monitor = DP-1
+    path = /home/silverio/wallpaper/a_woman_sitting_on_a_couch_looking_out_a_window.png
     fit_mode = cover
 }
 
