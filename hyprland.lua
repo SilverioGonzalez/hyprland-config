@@ -26,6 +26,8 @@ hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("TERMINAL", terminal)
+hl.env("EDITOR", "nvim")
+hl.env("VISUAL", "nvim")
 
 ----------------
 ----  MISC  ----
@@ -37,6 +39,7 @@ hl.config({
 		disable_hyprland_logo = true,
 	},
 })
+
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -50,31 +53,31 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 
--- FZF run / wallpaper / power menu keybinds
+-- FZF run / wallpaper / power menu keybinds (Explicit Ghostty Flag Layout)
 hl.bind(
 	mainMod .. " + D",
 	hl.dsp.exec_cmd(
-		string.format("%s/.local/bin/sys_term --class com.custom.centertui bash '%s/.local/bin/launch_app'", home, home)
+		string.format("%s --class=com.custom.centertui --command=\"bash %s/.local/bin/launch_app\"", terminal, home)
 	)
 )
 hl.bind(
 	mainMod .. " + A",
 	hl.dsp.exec_cmd(
-		string.format("%s/.local/bin/sys_term --class com.custom.centertui bash '%s/.local/bin/add_app'", home, home)
+		string.format("%s --class=com.custom.centertui --command=\"bash %s/.local/bin/add_app\"", terminal, home)
 	)
 )
 hl.bind(
 	mainMod .. " + R",
 	hl.dsp.exec_cmd(
-		string.format("%s/.local/bin/sys_term --class com.custom.centertui '%s/.local/bin/fzf_run'", home, home)
+		string.format("%s --class=com.custom.centertui --command=\"%s/.local/bin/fzf_run\"", terminal, home)
 	)
 )
 hl.bind(
 	mainMod .. " + W",
 	hl.dsp.exec_cmd(
 		string.format(
-			"%s/.local/bin/sys_term --class com.custom.large_centertui '%s/.local/bin/select_wallpaper'",
-			home,
+			"%s --class=com.custom.large_centertui --command=\"%s/.local/bin/select_wallpaper\"",
+			terminal,
 			home
 		)
 	)
@@ -83,7 +86,7 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(string.format("'%s/.local/bin
 hl.bind(
 	mainMod .. " + Escape",
 	hl.dsp.exec_cmd(
-		string.format("%s/.local/bin/sys_term --class com.custom.centertui '%s/.local/bin/power_menu'", home, home)
+		string.format("%s --class=com.custom.centertui --command=\"%s/.local/bin/power_menu\"", terminal, home)
 	)
 )
 
@@ -136,6 +139,7 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
+
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------
@@ -184,3 +188,4 @@ hl.window_rule({
 	stay_focused = true,
 	dim_around = true,
 })
+
