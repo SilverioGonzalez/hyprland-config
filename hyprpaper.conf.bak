@@ -3,7 +3,7 @@ ipc = true
 
 wallpaper {
     monitor = DP-1
-    path = /home/silverio/wallpaper/illustration-anime-character-rain.jpg
+    path = /home/silverio/wallpaper/sucidk1.png
     fit_mode = cover
 }
 
