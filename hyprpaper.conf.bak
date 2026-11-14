@@ -3,7 +3,7 @@ ipc = true
 
 wallpaper {
     monitor = DP-1
-    path = /home/silverio/wallpaper/sucidk1.png
+    path = /home/silverio/wallpaper/wallhaven-wepl6x_1920x1080.png
     fit_mode = cover
 }
 

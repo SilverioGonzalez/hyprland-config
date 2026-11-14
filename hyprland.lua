@@ -53,6 +53,22 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 
+-- Arrow Key Navigation with mainMod
+hl.bind(mainMod .. " + Left", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + Down", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + Up", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + Right", hl.dsp.focus({ direction = "right" }))
+
+-- Vim Style Navigation with mainMod 
+hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
+
+-- Volume control with F11 and F12 (repeatable when held, active when locked)
+hl.bind("F11", hl.dsp.exec_cmd("amixer -q set Master 5%-"), { repeating = true, locked = true })
+hl.bind("F12", hl.dsp.exec_cmd("amixer -q set Master 5%+"), { repeating = true, locked = true })
+
 -- FZF run / wallpaper / power menu keybinds (Explicit Ghostty Flag Layout)
 hl.bind(
 	mainMod .. " + D",
